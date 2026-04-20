@@ -5,12 +5,10 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__Postgres: ${CONNECTION_STRINGS__POSTGRES}
-      SERVICE_FQDN_BACKEND_8080: ${SERVICE_FQDN_BACKEND:-}
-    expose:
-      - "8080"
+      - SERVICE_FQDN_BACKEND_8080
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Postgres=${CONNECTION_STRINGS__POSTGRES}
     volumes:
       - backend-logs:/app/logs
     healthcheck:
@@ -26,14 +24,9 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      SERVICE_FQDN_FRONTEND_8080: ${SERVICE_FQDN_FRONTEND:-}
-    expose:
-      - "8080"
-    depends_on:
-      backend:
-        condition: service_healthy
+      - SERVICE_FQDN_FRONTEND_8080
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8080/"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/"]
       interval: 30s
       timeout: 5s
       retries: 3
