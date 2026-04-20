@@ -11,14 +11,14 @@ RUN dotnet publish Unitflow/Unitflow.csproj \
     --no-restore \
     /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-bookworm-slim AS runtime
 WORKDIR /app
+
+USER root
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/* \
-    && groupadd --system --gid 1000 app \
-    && useradd --system --uid 1000 --gid app --home-dir /app --shell /usr/sbin/nologin app \
     && mkdir -p /app/logs \
     && chown -R app:app /app
 
