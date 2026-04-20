@@ -1,0 +1,17 @@
+bin/
+obj/
+logs/
+*.user
+
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+.vs/
+.idea/
+.vscode/
+
+.env
+.env.*.local
+**/appsettings.Development.json
