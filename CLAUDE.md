@@ -2,4 +2,4 @@
 - Follow SOLID & DRY
 - Duplicate code that could be kept in a shared component is a defect
 - Backend: .NET 10, Scalar (as swagger alternative), PSQL, Serilog (Console+File+psql), vertical feature slice
-- Frontend: React, default shadcn, maximum shared components, easy to change appearance later
+- Frontend: React, default ui.frappe.io, maximum shared components, easy to change appearance later
